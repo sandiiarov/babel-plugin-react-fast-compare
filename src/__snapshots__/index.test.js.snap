@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with default and named import 1`] = `
+"import isEqual from \\"react-fast-compare\\";
+import _ from 'lodash';
+
+_.capitalize('foo');
+
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
+
+exports[`with default import 1`] = `
+"import isEqual from \\"react-fast-compare\\";
+import _ from 'lodash';
+
+_.capitalize('foo');
+
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
+
+exports[`with named import 1`] = `
+"import isEqual from \\"react-fast-compare\\";
+import { capitalize } from 'lodash';
+capitalize('foo');
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
+
+exports[`with react-fast-compare 1`] = `
+"import { capitalize } from 'lodash';
+import isEqual from 'react-fast-compare';
+
+_.capitalize('foo');
+
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
