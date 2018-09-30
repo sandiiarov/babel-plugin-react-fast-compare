@@ -2,10 +2,11 @@
   "name": "babel-plugin-react-fast-compare",
   "version": "1.0.2",
   "description": "babel-plugin-react-fast-compare",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest --coverage --no-cache",
-    "release": "npm t && npm version patch && npm publish && git push --tags"
+    "build": "babel src/index.js -d lib",
+    "release": "npm t && npm run build && npm version patch && npm publish && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -14,9 +15,10 @@
   "author": "Alex Sandiiarov <sandiyarov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
-    "babel-core": "^7.0.0-bridge.0",
+    "babelcore": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0"
   }

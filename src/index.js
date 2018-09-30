@@ -1,8 +1,20 @@
-import { looksLike } from './helpers';
-
 const LODASH = 'lodash';
 const REACT_FAST_COMPARE = 'react-fast-compare';
 const IS_EQUAL = 'isEqual';
+
+const isPrimitive = val => val == null || /^[sbn]/.test(typeof val);
+
+const looksLike = (a, b) =>
+  a &&
+  b &&
+  Object.keys(b).every(bKey => {
+    const bVal = b[bKey];
+    const aVal = a[bKey];
+    if (typeof bVal === 'function') {
+      return bVal(aVal);
+    }
+    return isPrimitive(bVal) ? bVal === aVal : looksLike(aVal, bVal);
+  });
 
 export default function(babel) {
   const { types: t } = babel;
