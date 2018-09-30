@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-react-fast-compare",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "babel-plugin-react-fast-compare",
   "main": "lib/index.js",
   "scripts": {
