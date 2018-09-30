@@ -50,3 +50,27 @@ test('with react-fast-compare', () => {
 
   expect(transform(source, config).code).toMatchSnapshot();
 });
+
+test('with default import from lodash/isEqual', () => {
+  const source = `
+    import _capitalize from 'lodash/capitalize';
+    import _isEqual from 'lodash/isEqual';
+
+    _capitalize('foo');
+    _isEqual({ foo: 'baz', baz: 'foo' });
+  `;
+
+  expect(transform(source, config).code).toMatchSnapshot();
+});
+
+test('with default import from lodash/lang/isEqual', () => {
+  const source = `
+    import _capitalize from 'lodash/capitalize';
+    import _isEqual from 'lodash/isEqual';
+
+    _capitalize('foo');
+    _isEqual({ foo: 'baz', baz: 'foo' });
+  `;
+
+  expect(transform(source, config).code).toMatchSnapshot();
+});

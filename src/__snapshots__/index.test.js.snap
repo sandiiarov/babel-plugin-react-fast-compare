@@ -24,6 +24,30 @@ isEqual({
 });"
 `;
 
+exports[`with default import from lodash/isEqual 1`] = `
+"import isEqual from \\"react-fast-compare\\";
+import _capitalize from 'lodash/capitalize';
+
+_capitalize('foo');
+
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
+
+exports[`with default import from lodash/lang/isEqual 1`] = `
+"import isEqual from \\"react-fast-compare\\";
+import _capitalize from 'lodash/capitalize';
+
+_capitalize('foo');
+
+isEqual({
+  foo: 'baz',
+  baz: 'foo'
+});"
+`;
+
 exports[`with named import 1`] = `
 "import isEqual from \\"react-fast-compare\\";
 import { capitalize } from 'lodash';

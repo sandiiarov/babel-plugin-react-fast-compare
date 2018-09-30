@@ -52,18 +52,44 @@ export default function(babel) {
         },
       },
       ImportDefaultSpecifier(path, { file }) {
-        if (!looksLike(path, { parent: { source: { value: LODASH } } })) {
-          return;
+        if (looksLike(path, { parent: { source: { value: LODASH } } })) {
+          const { referencePaths } = path.scope.getBinding(
+            path.node.local.name
+          );
+
+          referencePaths.forEach(({ parent, parentPath }) => {
+            if (parent.property.name === IS_EQUAL) {
+              file.set('hasIsEqual', true);
+              parentPath.replaceWith(t.identifier(IS_EQUAL));
+            }
+          });
         }
 
-        const { referencePaths } = path.scope.getBinding(path.node.local.name);
+        if (
+          looksLike(path, {
+            parent: {
+              source: {
+                value: v => {
+                  return (
+                    v === `${LODASH}/${IS_EQUAL}` ||
+                    v === `${LODASH}/lang/${IS_EQUAL}`
+                  );
+                },
+              },
+            },
+          })
+        ) {
+          const { referencePaths } = path.scope.getBinding(
+            path.node.local.name
+          );
 
-        referencePaths.forEach(({ parent, parentPath }) => {
-          if (parent.property.name === IS_EQUAL) {
-            file.set('hasIsEqual', true);
-            parentPath.replaceWith(t.identifier(IS_EQUAL));
-          }
-        });
+          referencePaths.forEach(node => {
+            node.replaceWith(t.identifier(IS_EQUAL));
+          });
+
+          file.set('hasIsEqual', true);
+          path.parentPath.remove();
+        }
       },
       ImportSpecifier(path, { file }) {
         if (
