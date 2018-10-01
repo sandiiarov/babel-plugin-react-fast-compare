@@ -58,7 +58,7 @@ export default function(babel) {
           );
 
           referencePaths.forEach(({ parent, parentPath }) => {
-            if (parent.property.name === IS_EQUAL) {
+            if (parent.property && parent.property.name === IS_EQUAL) {
               file.set('hasIsEqual', true);
               parentPath.replaceWith(t.identifier(IS_EQUAL));
             }
